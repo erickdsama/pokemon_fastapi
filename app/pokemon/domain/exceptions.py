@@ -1,0 +1,4 @@
+
+
+class WrongKantoLocation(Exception):
+    ...

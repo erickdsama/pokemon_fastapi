@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  api:
+    build: .
+    volumes:
+      - ./app:/test
+    env_file:
+      - .env_api
+    networks:
+      - localnet
+    depends_on:
+      - psql
+    ports:
+      - "8802:9000"
+  psql:
+    image: postgres
+    volumes:
+      - pg_volume:/var/lib/postgresql
+    networks:
+      - localnet
+    env_file:
+      - .env_db
+    ports:
+      - "5440:5432"
+networks:
+  localnet:
+    external: true
+
+volumes:
+  pg_volume:
+    external: true
